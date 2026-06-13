@@ -74,3 +74,12 @@ WHERE country = 'USA' AND score > 500
 SELECT *
 FROM customers
 WHERE NOt score < 500
+
+-- Retrieve all customer whose score falls in the range between 100 and 500
+Select *
+From customers
+Where score between 100 and 500
+
+Select *
+From customers
+Where score >= 100 and score <= 500
