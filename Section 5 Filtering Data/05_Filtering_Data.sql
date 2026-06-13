@@ -83,3 +83,8 @@ Where score between 100 and 500
 Select *
 From customers
 Where score >= 100 and score <= 500
+
+-- Retreive all customers from either Germany or USA.
+Select * 
+FROM customers
+WHERE Country In ('Germany', 'USA')
