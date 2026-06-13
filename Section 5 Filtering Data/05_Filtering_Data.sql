@@ -63,4 +63,9 @@ WHERE score <= 500
 -- Retrieve all customers who are from the USA and have a score greater than 500.
 SELECT *
 FROM customers
+WHERE country = 'USA' OR score > 500
+
+-- Retroeve all customers who are either from the USA OR have a score greater that 500
+SELECT *
+FROM customers
 WHERE country = 'USA' AND score > 500
