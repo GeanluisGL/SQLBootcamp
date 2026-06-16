@@ -88,5 +88,3 @@ Where score >= 100 and score <= 500
 Select * 
 FROM customers
 WHERE Country In ('Germany', 'USA')
-
-aaaaaaaaaaaaaaaaaaaaaaaaaa
