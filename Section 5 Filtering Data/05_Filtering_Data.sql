@@ -104,3 +104,6 @@ Select *
 From customers 
 Where first_name 
 Like '%R%'
+
+-- Find all customers whose first name content the letter 'R' in the third position
+Select * from customers where first_name like '__R%'
