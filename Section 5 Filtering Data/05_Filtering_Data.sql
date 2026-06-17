@@ -94,5 +94,13 @@ WHERE Country In ('Germany', 'USA')
 =============================================================================== */
 
 -- Find all customers whose first name start with 'M'
+Select * 
+From customers 
+Where first_name 
+Like 'M%'
 
-Select * from customers where first_name like 'M%'
+-- Find all customers whose first name content the letter 'R'
+Select *
+From customers 
+Where first_name 
+Like '%R%'
