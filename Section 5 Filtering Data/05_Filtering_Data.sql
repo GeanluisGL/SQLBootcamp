@@ -88,3 +88,11 @@ Where score >= 100 and score <= 500
 Select * 
 FROM customers
 WHERE Country In ('Germany', 'USA')
+
+/* ============================================================================== 
+   LIKE OPERATOR
+=============================================================================== */
+
+-- Find all customers whose first name start with 'M'
+
+Select * from customers where first_name like 'M%'
