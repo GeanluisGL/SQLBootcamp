@@ -7,8 +7,6 @@
    Table of Contents:
      1. SELECT ALL COLUMNS
      2. SELECT SPECIFIC COLUMNS
-     3. WHERE CLAUSE
-     4. ORDER BY
  ==============================================================================
    SELECT ALL COLUMNS
 =============================================================================== */
