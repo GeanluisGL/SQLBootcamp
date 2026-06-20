@@ -13,7 +13,7 @@
      6. HAVING
      7. DISTINCT
      8. TOP
-     9. Combining Queries
+
 
  ==============================================================================
    SELECT ALL COLUMNS
