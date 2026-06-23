@@ -70,3 +70,16 @@ Select
 FROM customers AS C 
 FULL JOIN orders
 ON c.id = orders.customer_id ;
+
+
+--LEFT anti Join
+--Get all customers who havent place any order
+Select 
+c.id,
+	c.first_name,
+	order_id,
+	sales
+FROM customers AS C
+LEFT JOIN  orders
+ON c.id = orders.customer_id
+Where orders.customer_id IS NULL
