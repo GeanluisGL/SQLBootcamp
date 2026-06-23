@@ -39,6 +39,7 @@ on c.id = orders.customer_id
 
 --LEFT Join
 -- Get all customers along with their orders including those without orders
+	
 Select 
 c.id,
 	c.first_name,
