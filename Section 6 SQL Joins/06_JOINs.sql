@@ -95,3 +95,15 @@ FROM customers AS C
 RIGHT JOIN  orders
 ON c.id = orders.customer_id
 Where C.ID IS NULL
+
+
+--Get all orders without matching customers (LEFT ANTI JOIN)
+Select 
+c.id,
+	c.first_name,
+	order_id,
+	sales
+FROM orders 
+LEFT JOIN customers AS C  /**Le hice el join a la tabla de customer y nege los valores que no eran matching **/
+ON c.id = orders.customer_id 
+Where c.id IS NULL
