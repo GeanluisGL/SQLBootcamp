@@ -59,3 +59,14 @@ Select
 FROM orders
 RIGHT JOIN  customers AS C
 ON c.id = orders.customer_id;
+
+--Full Join
+--Get all customers and all order even if there's no match
+Select 
+	c.id,
+	c.first_name,
+	order_id,
+	sales
+FROM customers AS C 
+FULL JOIN orders
+ON c.id = orders.customer_id ;
