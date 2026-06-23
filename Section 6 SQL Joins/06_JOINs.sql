@@ -135,3 +135,9 @@ FROM customers as C
 LEFT JOIN orders
 ON C.ID = orders.customer_id
 WHERE  orders.customer_id is NOT null
+
+ -- Cross JOIN
+ /**Generate all possible combinations of customers and orders**/
+ Select * 
+ From customers
+ Cross Join orders
