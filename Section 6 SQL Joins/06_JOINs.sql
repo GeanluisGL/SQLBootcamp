@@ -35,3 +35,15 @@ Select
 FROM customers as c
 INNER JOIN orders
 on c.id = orders.customer_id
+
+
+--LEFT Join
+-- Get all customers along with their orders including those without orders
+Select 
+c.id,
+	c.first_name,
+	order_id,
+	sales
+FROM customers AS C
+LEFT JOIN orders
+ON c.id = orders.customer_id;
