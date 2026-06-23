@@ -107,3 +107,16 @@ FROM orders
 LEFT JOIN customers AS C  /**Le hice el join a la tabla de customer y nege los valores que no eran matching **/
 ON c.id = orders.customer_id 
 Where c.id IS NULL
+
+--FULL JOIN
+/**FIND CUSTOMERS WITHOUT ORDERS AND FIND ORDERS WITHOUT MATCHING CUSTOMERS**/
+SELECT 
+	c.id,
+	c.first_name,
+	order_id,
+	sales
+FROM  customers as C
+FULL JOIN  orders
+ON c.id = orders.customer_id
+WHERE c.id IS NULL
+OR orders.customer_id IS NULL
