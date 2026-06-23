@@ -39,7 +39,6 @@ on c.id = orders.customer_id
 
 --LEFT Join
 -- Get all customers along with their orders including those without orders
-	
 Select 
 c.id,
 	c.first_name,
@@ -47,4 +46,16 @@ c.id,
 	sales
 FROM customers AS C
 LEFT JOIN orders
+ON c.id = orders.customer_id;
+
+
+--RIGHT Join
+-- Get all customers along with their orders including those orders without without customer
+Select 
+	c.id,
+	c.first_name,
+	order_id,
+	sales
+FROM orders
+RIGHT JOIN  customers AS C
 ON c.id = orders.customer_id;
