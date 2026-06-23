@@ -120,3 +120,18 @@ FULL JOIN  orders
 ON c.id = orders.customer_id
 WHERE c.id IS NULL
 OR orders.customer_id IS NULL
+
+--Extra challenge
+/**Get all customers along with their orders
+but only for customers who haver placed an order (WITHOUT USING INNER JOIN ) **/
+
+SELECT 
+	c.id,
+	c.first_name,
+	customer_id,
+	order_id,
+	sales
+FROM customers as C
+LEFT JOIN orders
+ON C.ID = orders.customer_id
+WHERE  orders.customer_id is NOT null
