@@ -141,3 +141,22 @@ WHERE  orders.customer_id is NOT null
  Select * 
  From customers
  Cross Join orders
+
+ --Multi Join
+ /**Using SalesDB, retrieve a list of all orders along with 
+    the related customer, product, and empoloyee details**/
+
+use SalesDB
+Select 
+o.OrderID,
+o.Sales,
+C.FirstName ,
+C.LastName,
+P.Product, 
+P.Price,
+e.FirstName,
+e.LastName 
+from Sales.Orders as O
+LEFT Join Sales.Customers as C on O.CustomerID = C.CustomerID
+LEFT JOIN Sales.Products as P on O.ProductID = P.ProductID
+LEFT Join Sales.Employees as E On O.SalesPersonID = e.EmployeeID
