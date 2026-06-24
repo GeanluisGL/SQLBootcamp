@@ -49,3 +49,39 @@ c.FirstName,
 c.LastName
 FROM sales.Customers as c
 
+
+-- Orders data are stored in separate tables (Ordes and OrdersArchive).
+-- Combine all orders data into one report without duplicate
+
+Select 
+	'Orders' As SourceTable
+      ,[OrderID]
+      ,[ProductID]
+      ,[CustomerID]
+      ,[SalesPersonID]
+      ,[OrderDate]
+      ,[ShipDate]
+      ,[OrderStatus]
+      ,[ShipAddress]
+      ,[BillAddress]
+      ,[Quantity]
+      ,[Sales]
+      ,[CreationTime]
+FROM Sales.Orders
+union
+Select
+	'Orders Archive' As SourceTable
+	  ,[OrderID]
+      ,[ProductID]
+      ,[CustomerID]
+      ,[SalesPersonID]
+      ,[OrderDate]
+      ,[ShipDate]
+      ,[OrderStatus]
+      ,[ShipAddress]
+      ,[BillAddress]
+      ,[Quantity]
+      ,[Sales]
+      ,[CreationTime]
+FROM Sales.OrdersArchive
+Order by OrderID
