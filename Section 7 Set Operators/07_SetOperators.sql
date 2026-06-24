@@ -36,3 +36,16 @@ SELECT
 c.FirstName,
 c.LastName
 FROM sales.Customers as c
+
+--INTERSECT
+/**FIND the employees who are also customers at the same time**/
+SELECT 
+E.FirstName,
+E.LastName
+FROM sales.Employees as E
+INTERSECT
+SELECT 
+c.FirstName,
+c.LastName
+FROM sales.Customers as c
+
