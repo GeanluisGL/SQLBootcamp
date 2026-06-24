@@ -24,3 +24,15 @@ SELECT
 c.FirstName,
 c.LastName
 FROM sales.Customers as c
+
+--EXCEPT
+/**FIND the employees who are not customers at the same time**/
+SELECT 
+E.FirstName,
+E.LastName
+FROM sales.Employees as E
+EXCEPT
+SELECT 
+c.FirstName,
+c.LastName
+FROM sales.Customers as c
