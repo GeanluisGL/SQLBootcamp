@@ -49,3 +49,10 @@ FirstName,
 Left(FirstName, 2) As '2 Left Characters',
 Right(FirstName, 2) As '2 Right Characters' 
 FROM Sales.Customers 
+ 
+--Substring
+--Retrieve a list of customers first names after removing the first character
+Select
+FirstName, 
+Substring(firstname, 2, Len(FirstName)) As 'Substring'
+FROM Sales.Customers 
