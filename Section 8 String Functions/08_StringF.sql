@@ -41,3 +41,11 @@ Replace( '123-456-7890', '-', ' ') as clean_phone
 SELECT
 'report.txt' as 'olf file',
 Replace('report.txt', 'txt', 'CVS') as 'new file'
+
+--Left & Right
+--Retrieve the first and the last two characters of each firstname
+ Select
+FirstName, 
+Left(FirstName, 2) As '2 Left Characters',
+Right(FirstName, 2) As '2 Right Characters' 
+FROM Sales.Customers 
