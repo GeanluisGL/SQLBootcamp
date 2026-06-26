@@ -30,3 +30,14 @@ Len(FirstName) as Len_Name,
 Country
 FROM Sales.Customers 
 --Where FirstName != Trim(FirstName)
+
+--Replace
+--Remove dashes (-) from a phone number
+Select
+'123-456-7890' as phone,
+Replace( '123-456-7890', '-', ' ') as clean_phone
+
+--Replace file Extence from txt to CSV
+SELECT
+'report.txt' as 'olf file',
+Replace('report.txt', 'txt', 'CVS') as 'new file'
