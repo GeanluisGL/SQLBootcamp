@@ -21,3 +21,12 @@ CONCAT(FirstName, ' ', Country ) As 'Name & Country',
 Upper(Firstname) as 'Upper_Case',
 lower(Firstname) as 'Lower_Case'
 FROM Sales.Customers 
+
+--Trim
+--Find customersd whose first name contains leading or trailing spaces
+ Select
+FirstName,
+Len(FirstName) as Len_Name,
+Country
+FROM Sales.Customers 
+--Where FirstName != Trim(FirstName)
