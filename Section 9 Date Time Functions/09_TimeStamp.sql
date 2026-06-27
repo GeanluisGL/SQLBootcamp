@@ -25,3 +25,12 @@ DATEPART (YEAR, Creationtime) as 'Year',
 DATEPART (MM, Creationtime)as 'Month',
 DATEPART (DAY, Creationtime) as 'Day'
 FROM Sales.Orders
+
+-- DATEPART
+Select
+OrderId,
+CreationTime,
+DATEPART (QUARTER, Creationtime) as 'Quarter',
+DATEPART (WEEK, Creationtime) as 'Week',
+DATEPART (WEEKDAY, Creationtime) as 'Weekday'
+FROM Sales.Orders
