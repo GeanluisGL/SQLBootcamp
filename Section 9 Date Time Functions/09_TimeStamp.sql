@@ -16,3 +16,12 @@ Year(CreationTime) as 'Year',
 Month(CreationTime) as 'Month',
 Day(CreationTime) as 'Day'
 FROM Sales.Orders
+  
+-- DATEPART
+Select
+OrderId,
+CreationTime,
+DATEPART (YEAR, Creationtime) as 'Year',
+DATEPART (MM, Creationtime)as 'Month',
+DATEPART (DAY, Creationtime) as 'Day'
+FROM Sales.Orders
