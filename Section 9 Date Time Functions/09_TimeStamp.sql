@@ -35,4 +35,4 @@ DATEPART (WEEK, Creationtime) as 'Week',
 DATEPART (WEEKDAY, Creationtime) as 'Weekday'
 FROM Sales.Orders
 
-wOOOO
+wOOO
