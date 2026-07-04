@@ -34,3 +34,5 @@ DATEPART (QUARTER, Creationtime) as 'Quarter',
 DATEPART (WEEK, Creationtime) as 'Week',
 DATEPART (WEEKDAY, Creationtime) as 'Weekday'
 FROM Sales.Orders;
+
+--DATETRUNC
