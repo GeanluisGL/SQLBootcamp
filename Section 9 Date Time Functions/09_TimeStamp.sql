@@ -1,4 +1,4 @@
---Section 9 Date Time Functions
+--Section 9 Datetime Functions
 
 --Table where we gonna WORK
 Select
