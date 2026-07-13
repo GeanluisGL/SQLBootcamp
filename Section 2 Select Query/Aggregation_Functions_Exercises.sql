@@ -151,3 +151,100 @@ MIN(PRECIO) AS 'MIN',
 MAX(PRECIO) AS 'MAX',
 (MAX(PRECIO) - MIN(PRECIO)) AS 'RANGO'
 FROM productos
+
+-- ================================================ --
+--5. GROUP BY + COUNT - Ventas por categoría
+--¿Cuántos productos se han vendido de cada categoría? (Usa cantidad, no número de transacciones).
+-- ================================================ --
+
+--SELECT 
+--COUNT (*),
+--categoria
+--FROM productos
+--GROUP BY categoria
+
+SELECT 
+    p.categoria,
+    SUM(v.cantidad) AS unidades_vendidas
+FROM ventas v
+JOIN productos p ON v.id_producto = p.id_producto
+GROUP BY p.categoria
+ORDER BY unidades_vendidas DESC;
+
+-- ================================================ --
+--6. GROUP BY + SUM - Ingresos por ciudad
+--Muestra el total facturado por cada ciudad (únete con clientes).
+-- ================================================ --
+SELECT
+c.ciudad,
+Sum(cantidad * precio_unitario) as 'Total_Facturado'
+FROM ventas as v
+JOIN CLIENTES as c ON v.id_cliente = c.id_cliente
+Group by (c.ciudad)
+oRDER BY Total_Facturado 
+
+-- ================================================ --
+--7. GROUP BY + AVG - Precio promedio por categoría
+--Calcula el precio promedio de los productos de cada categoría (usa la tabla productos, no ventas).
+-- ================================================ --
+
+Select 
+categoria,
+AVG (precio) as 'Avg_Price'
+from productos
+group by categoria
+
+-- ================================================ --
+--8. GROUP BY + MIN/MAX - Fechas por cliente
+--Para cada cliente, muestra la fecha de su primera y última compra.
+-- ================================================ --
+
+SELECT 
+C.id_cliente,
+C.nombre,
+MIN (V.fecha_venta) AS 'PRIMERA COMPRA',
+MAX (V.fecha_venta) AS 'ULTIMA COMPRA'
+FROM clientes AS C
+JOIN VENTAS AS V
+ON C.id_cliente = V.id_cliente
+GROUP BY C.id_cliente, C.nombre
+
+-- ================================================ --
+--9. HAVING + COUNT - Clientes top
+--¿Qué clientes han realizado  transacciones)? Muestra su nombre y número de compras.
+-- ================================================ --
+
+SELECT 
+C.nombre,
+COUNT  (*) AS 'TOTAL DE TRANSACCIONES'
+FROM clientes AS C
+JOIN ventas AS V
+ON C.id_cliente = V.id_cliente
+GROUP by c.nombre
+HAVING   COUNT(*) > 3
+
+-- ================================================ --
+--10. HAVING + SUM - Ciudades rentables
+--¿Qué ciudades han generado más de 400€ en ingresos? Muestra la ciudad y el total.
+-- ================================================ --
+
+SELECT 
+CLIENTES.ciudad,
+SUM (VENTAS.precio_unitario * ventas.cantidad) as 'Total Generado'
+FROM CLIENTES
+JOIN VENTAS
+ON clientes.id_cliente = ventas.id_cliente
+GROUP BY clientes.ciudad
+HAVING SUM(precio_unitario * cantidad) > 400  
+
+-- ================================================ --
+-- 11. HAVING + AVG - Categorías VIP 
+-- Muestra las categorías cuyo precio promedio supere los 50€.
+-- ================================================ --
+
+SELECT 
+categoria,
+AVG(PRECIO)
+FROM productos
+GROUP BY  categoria
+HAVING AVG(PRECIO) > 50
