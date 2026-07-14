@@ -332,3 +332,65 @@ Format (OrderDate, 'MMM,yyyy') Date,
 Count (*) as 'Count'
 FROM  SALES.Orders
 Group by Format (OrderDate, 'MMM,yyyy')
+
+
+--Convert
+SELECT
+Convert(varchar, 123) AS 'INT TO String',
+Convert(INT, '506') AS 'String to INT',
+Convert(varchar, 123) AS 'INT TO String',
+Convert(Date, CreationTime) as 'Datetime to date'
+From Sales.Orders
+
+--Cast
+SELECT
+CAST ('123' AS INT) AS 'STRING TO INT',
+CAST (123 AS VARCHAR) AS 'INT TO STRING',
+CAST ('2025-08-20' AS DATE) AS 'STRING TO DATE',
+CAST ('2025-08-20' AS DATETIME2) AS 'STRING TO DATETIME',
+CREATIONTIME,
+CAST(CREATIONTIME AS DATE) AS 'DATETIME TO DATE'
+FROM SALES.Orders
+
+Select
+O.OrderID,
+O.OrderDate,
+O.CreationTime,
+Dateadd( year, 2, OrderDate),
+Dateadd( month, -4, orderdate),
+Dateadd( DAY, -4, orderdate)
+From Sales.Orders as O
+inner Join Sales.Customers as S
+on o.CustomerID = s.CustomerID
+
+
+-- Calculate the employees age
+Select
+EmployeeId
+Birthdate,
+Datediff (year, birthdate, Getdate()) as age
+from sales.employees
+
+
+-- Find the average shipping duration in days for each month
+Select
+Month(OrderDate),
+Avg (Datediff (day, OrderDate, ShipDate)) as 'Shipping duration'
+from sales.Orders
+Group by month(OrderDate)
+
+-- Find the noumber of days between each order and previous order
+SELECT 
+OrderID,
+OrderDate,
+LAG(OrderDate) OVER (ORDER BY ORDERDATE) AS 'Previous Date',
+DATEDIFF(DAY, (LAG(OrderDate) OVER (ORDER BY ORDERDATE)), ORDERDATE) AS 'DIFERENCIA ENTRE FECHAS'
+FROM SALES.Orders
+
+
+--Isdate
+SELECT
+ISDATE('123'),
+ISDATE('2025-08-20'),
+ISDATE('20-08-2025')
+
