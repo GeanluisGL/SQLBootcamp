@@ -1,4 +1,4 @@
-Use SalesDB
+yUse SalesDB
 Go
 
 --FIND THE AVERAGE SCORES OF THE CUSTOMERS
@@ -26,4 +26,4 @@ LastName,
 FirstName + ' ' + Coalesce(Lastname, ' ') AS 'Fullname', 
 Score,
 (Coalesce(score, 0)) + 10 AS '+ 10 POINTS'
-FROM Sales.Customers
+FROM Sales.Customers;
