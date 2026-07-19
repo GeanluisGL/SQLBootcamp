@@ -1,4 +1,4 @@
-yUse SalesDB
+Use SalesDB
 Go
 
 --FIND THE AVERAGE SCORES OF THE CUSTOMERS
@@ -6,13 +6,13 @@ Go
 SELECT
 sCORE,
 AVG(COALESCE(SCORE, 0)) OVER () AS 'SCORE AVERAGE'
-FROM Sales.Customers;
+FROM Sales.Customers
 
 -- IN this case is for a String Value.
 	Select 
 	Lastname,
 	Coalesce(Lastname, 'Unknown') as 'Lastname'
-	FROM Sales.Customers;
+	FROM Sales.Customers
 
 
 -- USE CASE FOR MATHEMATICAL OPERATOIN
@@ -23,7 +23,28 @@ SELECT
 CustomerID,
 FirstName,
 LastName,
-FirstName + ' ' + Coalesce(Lastname, ' ') AS 'Fullname', 
 Score,
+FirstName + ' ' + Coalesce(Lastname, ' ') AS 'Fullname', 
 (Coalesce(score, 0)) + 10 AS '+ 10 POINTS'
-FROM Sales.Customers;
+FROM Sales.Customers
+
+
+-- USE CASE Sorting Data
+--SORT the customers from lowest to highest scores with nulls appearing last
+SELECT
+CustomerID,
+score,
+Case When Score Is null Then 1 else 0 End as 'Flag'
+FROM SALES.Customers
+ORDER BY Case When Score Is null Then 1 else 0 End 
+
+
+
+--Null If
+-- Find the sales prices for each order by dividing the sales by the quantity
+Select
+OrderId,
+Sales,
+Quantity,
+Sales / Nullif(Quantity ,0) 
+from  Sales.Orders
