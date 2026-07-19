@@ -6,7 +6,7 @@ Go
 SELECT
 sCORE,
 AVG(COALESCE(SCORE, 0)) OVER () AS 'SCORE AVERAGE'
-FROM Sales.Customers
+FROM Sales.Customers;
 
 -- IN this case is for a String Value.
 	Select 
