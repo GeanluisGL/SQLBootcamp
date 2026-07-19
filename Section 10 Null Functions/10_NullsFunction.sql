@@ -12,7 +12,7 @@ FROM Sales.Customers
 	Select 
 	Lastname,
 	Coalesce(Lastname, 'Unknown') as 'Lastname'
-	FROM Sales.Customers
+	FROM Sales.Customers;
 
 
 -- USE CASE FOR MATHEMATICAL OPERATOIN
