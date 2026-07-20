@@ -48,3 +48,34 @@ Sales,
 Quantity,
 Sales / Nullif(Quantity ,0) 
 from  Sales.Orders
+
+--IS NULL & IS NOT NULL
+--Identify the customers who have no scores
+
+SELECT
+*
+FROM Sales.Customers
+WHERE SCORE IS NULL
+
+--Identify the customers who only have scores
+
+SELECT
+*
+FROM Sales.Customers
+WHERE SCORE IS NOT NULL
+
+--List all details for customers who have not placed any order
+
+SELECT 
+C.*,
+O.CustomerID
+FROM SALES.Customers AS C
+LEFT   JOIN SALES.Orders AS O
+ON C.CustomerID = O.CustomerID
+WHERE O.CustomerID IS NULL
+
+SELECT
+*
+FROM SALES.Orders
+
+
