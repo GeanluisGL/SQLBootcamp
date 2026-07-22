@@ -76,6 +76,6 @@ WHERE O.CustomerID IS NULL
 
 SELECT
 *
-FROM SALES.Orders;
+
 
 
