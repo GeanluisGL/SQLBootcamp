@@ -74,7 +74,7 @@ LEFT   JOIN SALES.Orders AS O
 ON C.CustomerID = O.CustomerID
 WHERE O.CustomerID IS NULL
 
-SELECT
+
 
 
 
