@@ -75,7 +75,7 @@ ON C.CustomerID = O.CustomerID
 WHERE O.CustomerID IS NULL
 
 SELECT
-*
+
 
 
 
