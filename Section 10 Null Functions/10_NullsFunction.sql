@@ -72,7 +72,7 @@ O.CustomerID
 FROM SALES.Customers AS C
 LEFT   JOIN SALES.Orders AS O
 ON C.CustomerID = O.CustomerID
-WHERE O.CustomerID IS NULL
+WHERE O.CustomerID IS NULL;
 
 
 
