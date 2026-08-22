@@ -1,6 +1,6 @@
 Use SalesDB
 Go
-
+q
 --FIND THE AVERAGE SCORES OF THE CUSTOMERS
 --Coalesce is used for replacing null's values in a column or a row - IN this case is for INT
 SELECT
