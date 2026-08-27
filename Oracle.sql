@@ -87,7 +87,7 @@ Where fecha_pedido between '01-FEB-24' and '28-FEB-24';
 
 --14. Mostrar la cantidad de clientes registrados.
     SELECT
-    COUNT (*) NOMBRE as 'TOTAL DE CLIENTES' 
+    COUNT (*) APELLIDO AS "TOTAL DE CLIENTES"
     FROM CLIENTES;
 
 --15. Mostrar el precio promedio de todos los productos.
@@ -277,48 +277,185 @@ Where fecha_pedido between '01-FEB-24' and '28-FEB-24';
 
 
 --32. Mostrar los clientes que han gastado más que el promedio de todos los clientes.
+    SELECT 
+    P.CLIENTE_ID,
+    C.NOMBRE || ' ' || C.APELLIDO AS "CLIENTE",
+    SUM(P.TOTAL) AS "CONSUMIDO"
+    FROM PEDIDOS P
+    JOIN CLIENTES C 
+    ON P.CLIENTE_ID = C.CLIENTE_ID
+    GROUP BY P.CLIENTE_ID, C.NOMBRE, C.APELLIDO
+    HAVING SUM(P.TOTAL) > (
+    SELECT
+    AVG(TOTAL)
+    FROM PEDIDOS)
+    
 
 
 --33. Mostrar el producto más vendido (en cantidad de unidades).
-
-
+    SELECT 
+    P.PRODUCTO_ID,
+    PR.NOMBRE_PRODUCTO,
+    SUM(P.CANTIDAD) AS "CANTIDAD VENDIDA"
+    FROM PEDIDOS P
+    JOIN PRODUCTOS PR
+    ON P.PRODUCTO_ID = PR.PRODUCTO_ID
+    GROUP BY P.PRODUCTO_ID, PR.NOMBRE_PRODUCTO
+    HAVING SUM(P.CANTIDAD) = (
+    SELECT
+    MAX(SUM(CANTIDAD))
+    FROM PEDIDOS
+    GROUP BY PRODUCTO_ID 
+    )
+    
 --34. Mostrar el cliente que ha realizado el pedido más caro.
-
+    SELECT
+    P.CLIENTE_ID AS "CLIENTE ID",
+    C.NOMBRE || ' ' || C.APELLIDO AS "CLIENTE", 
+    P.TOTAL
+    FROM PEDIDOS P
+    JOIN CLIENTES C
+    ON P.CLIENTE_ID = C.CLIENTE_ID
+    WHERE TOTAL = (
+    SELECT 
+    MAX(TOTAL)
+    FROM PEDIDOS
+    )
 
 --35. Mostrar los productos con stock menor a 10 unidades.
+    SELECT 
+    *
+    FROM PRODUCTOS
+    WHERE STOCK <= 10
+    
 
 --Ejercicios de funciones de fecha
 --36. Mostrar los clientes que se registraron en el año 2024.
+    SELECT
+    *
+    FROM CLIENTES
+    WHERE TO_CHAR (FECHA_REGISTRO, 'YY') = 24
 
 --37. Mostrar los pedidos realizados en los últimos 30 días.
+    SELECT
+    *
+    FROM CLIENTES
+    WHERE FECHA_REGISTRO >= SYSDATE - 30
 
 --38. Mostrar la cantidad de pedidos realizados por mes en el año 2024.
-
+    SELECT
+    TO_CHAR (FECHA_PEDIDO, 'FMMONTH') AS "MES",
+    SUM(CANTIDAD) AS "SUMA"
+    FROM PEDIDOS
+    GROUP BY     TO_CHAR (FECHA_PEDIDO, 'FMMONTH') 
+    
 --39. Mostrar los clientes que cumplen años en el mes actual (asumiendo que fecha_registro es su cumpleaños).
+    SELECT
+    *
+    FROM CLIENTES
+    WHERE TO_CHAR(FECHA_REGISTRO, 'FMMONTH') =  TO_CHAR(SYSDATE, 'FMMONTH') 
 
 --40. Mostrar la antigüedad en días de cada cliente (días desde su registro hasta hoy).
+    SELECT
+    NOMBRE || ' ' || APELLIDO,
+    FECHA_REGISTRO AS "FECHA DE REGISTRO",
+    TRUNC(SYSDATE - FECHA_REGISTRO) AS "ANTIGUEDAD_DIAS"
+    FROM CLIENTES    
+
 
 --Ejercicios de CASE y condiciones
 --41. Clasificar los productos por precio: 'Económico' (menos de $100), 'Medio' ($100-$500), 'Caro' (más de $500).
+    SELECT
+    NOMBRE_PRODUCTO,
+    PRECIO,
+    CASE
+        WHEN PRECIO < 100 THEN 'ECONOMICO'
+        WHEN PRECIO >= 100 and PRECIO <= 500 THEN 'MEDIO'
+        ELSE 'CARO'
+    END AS "CLASIFICACION"
+    FROM PRODUCTOS
+    ORDER BY PRECIO DESC
 
 --42. Mostrar los pedidos con una columna adicional que indique si el total es mayor o menor a $500.
+    SELECT
+    PEDIDO_ID,
+    TOTAL,
+    CASE
+        WHEN TOTAL <= 500 THEN 'MAYOR'
+        WHEN TOTAL > 500 THEN 'MENOR'
+    END AS "INDICACION",
+    FECHA_PEDIDO,
+    ESTADO
+    FROM PEDIDOS
 
 --43. Clasificar a los clientes por ciudad: 'Local' si es 'Miami', 'Nacional' si es cualquier otra.
+    SELECT
+    NOMBRE || ' ' || APELLIDO,
+    ESTADO,
+    CIUDAD,
+    CASE
+        WHEN CIUDAD = 'Miami' THEN 'LOCAL'
+        ELSE 'NACIONAL'
+    END AS "CLASIFICACION"
+    FROM CLIENTES
 
 --44. Mostrar el estado del pedido traducido: 'PENDIENTE' → 'Pendiente', 'ENTREGADO' → 'Entregado', etc.
+    SELECT
+    PEDIDO_ID,
+    TOTAL,
+    ESTADO,
+    CASE
+        WHEN ESTADO = 'PENDIENTE' THEN 'Pendiente'
+        WHEN ESTADO = 'ENTREGADO' THEN 'Entregado'
+        ELSE 'Enviado'
+    END AS "Traduccion"
+    FROM PEDIDOS
 
 --45. Crear una columna que indique el rango de edad de los clientes (asumiendo que tienen una columna de fecha de nacimiento, pero si no la tienen, puedes usar fecha_registro como referencia).
+    SELECT
+    NOMBRE || ' ' || APELLIDO AS "NOMBRE COMPLETO",
+    FECHA_REGISTRO AS "FECHA DE NACIMIENTO",
+    CASE
+        WHEN (SYSDATE - FECHA_REGISTRO) > 500 THEN 'NUEVO'
+        ELSE 'ANTIGUO'
+    END AS "ANTIGUEDAD"
+    FROM CLIENTES
 
 --Ejercicios de manejo de NULL
 --46. Mostrar los clientes reemplazando los teléfonos NULL con 'Sin teléfono'.
+    SELECT
+    CLIENTE_ID,
+    NOMBRE || ' ' || APELLIDO AS "NOMBRE",
+    (COALESCE(TELEFONO, 'SIN TELEFONO')) AS "TELEFONO"
+    FROM CLIENTES
+    WHERE TELEFONO IS NULL
 
 --47. Mostrar los productos reemplazando las descripciones NULL con 'Sin descripción'.
+    SELECT
+    PRODUCTO_ID,
+    NOMBRE_PRODUCTO,
+    (COALESCE(DESCRIPCION, 'SIN DESCRIPCION')) AS "DESCRIPCION"
+    FROM PRODUCTOS
+    WHERE DESCRIPCION IS NULL
 
 --48. Mostrar los pedidos con estado NULL como 'DESCONOCIDO'.
+    SELECT
+    PEDIDO_ID,
+    FECHA_PEDIDO,
+    (COALESCE(ESTADO, 'DESCONOCIDO')) AS "ESTADO"
+    FROM PEDIDOS
 
 --49. Contar cuántos clientes tienen teléfono registrado.
+    SELECT
+    COUNT(*) CLIENTE_ID
+    FROM CLIENTES
+    WHERE TELEFONO IS NOT NULL
 
 --50. Mostrar los pedidos donde el precio_unitario sea NULL (si existe esa posibilidad).
+    SELECT
+    *
+    FROM PEDIDOS
+    WHERE PRECIO_UNITARIO IS NULL
 
 --📙 EJERCICIOS AVANZADOS (Para seguir practicando)
 
@@ -401,3 +538,6 @@ Where fecha_pedido between '01-FEB-24' and '28-FEB-24';
 --84. Calcular el tiempo promedio entre pedidos de un mismo cliente.
 
 --85. Encontrar la hora del día (o día de la semana) con más pedidos.
+
+
+
