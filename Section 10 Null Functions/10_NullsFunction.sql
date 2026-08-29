@@ -13,7 +13,7 @@ FROM Sales.Customers
 	Lastname,
 	Coalesce(Lastname, 'Unknown') as 'Lastname'
 	FROM Sales.Customers
-
+-----
 
 -- USE CASE FOR MATHEMATICAL OPERATOIN
 -- Display the full name of customers by merging their first and last names
