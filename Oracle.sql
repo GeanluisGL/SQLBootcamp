@@ -9,14 +9,14 @@
 
 --1. Mostrar todos los datos de la tabla CLIENTES.
 
-select * from clientes
+select * from clientes;
 
 --2. Mostrar solo los nombres y apellidos de los clientes.
 
 Select 
 nombre, 
 apellido 
-FROM clientes;
+FROM clientes
 
 --3. Mostrar los clientes que viven en el estado 'CA'.
 Select nombre
