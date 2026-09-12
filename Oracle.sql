@@ -16,7 +16,7 @@ select * from clientes;
 Select 
 nombre, 
 apellido 
-FROM clientes
+FROM clientes;
 
 --3. Mostrar los clientes que viven en el estado 'CA'.
 Select nombre
