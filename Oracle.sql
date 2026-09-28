@@ -2,6 +2,8 @@
 
 --Usa SELECT * FROM nombre_tabla; para ver los datos
 
+;
+
 --Usa WHERE ROWNUM <= 10; para limitar resultados
 
 --Usa FETCH FIRST 10 ROWS ONLY; en Oracle 12c+
