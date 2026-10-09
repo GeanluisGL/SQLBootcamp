@@ -1,4 +1,5 @@
 # 🗄️ SQL Bootcamp — De Cero a Héroe
+---
 
 ![SQL](https://img.shields.io/badge/SQL-Bootcamp-blue?style=for-the-badge&logo=databricks&logoColor=white)
 ![Hours](https://img.shields.io/badge/Duración-30%20horas-green?style=for-the-badge)
